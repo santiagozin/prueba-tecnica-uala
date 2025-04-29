@@ -14,7 +14,7 @@ export default function Transaction({ transaction }: TransactionProps) {
       <div className="flex">
         <img src={store} alt="Store" className="w-10 h-10" />
 
-        <div className="flex flex-col ml-2 leading-6">
+        <div className="flex flex-col ml-2 leading-5">
           <span className="font-medium capitalize">
             {transaction.paymentMethod}
           </span>

@@ -45,3 +45,21 @@ function Toggle({
 }
 
 export { Toggle, toggleVariants }
+
+/*
+Ejemplo de uso con icono:
+
+import { Bell } from "lucide-react" // o cualquier otro icono que prefieras
+
+// Uso básico con icono
+<Toggle>
+  <Bell className="size-4" />
+  Notificaciones
+</Toggle>
+
+// Uso con variantes
+<Toggle variant="outline" size="sm">
+  <Bell className="size-4" />
+  Notificaciones
+</Toggle>
+*/

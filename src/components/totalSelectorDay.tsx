@@ -8,7 +8,7 @@ import {
   endOfMonth,
   isWithinInterval,
 } from "date-fns";
-  import { Transaction } from "@/types/transaction";
+import { Transaction } from "@/types/transaction";
 
 interface SelectorDayProps {
   selectedPeriod: "daily" | "weekly" | "monthly";

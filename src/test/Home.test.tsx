@@ -3,6 +3,7 @@ import { vi, describe, it, expect } from 'vitest';
 import Home from '@/pages/Home';
 import { TransactionContext } from '@/context/TransactionContext';
 import { Transaction, TransactionFilters } from '@/types/transaction';
+import { MemoryRouter } from 'react-router-dom';
 
 // Mock
 const mockTransactions: Transaction[] = [
@@ -44,13 +45,20 @@ const mockContextValue = {
   clearFilters: vi.fn()
 };
 
+// Función auxiliar para renderizar el componente con los providers necesarios
+const renderWithProviders = (ui: React.ReactElement) => {
+  return render(
+    <MemoryRouter>
+      <TransactionContext.Provider value={mockContextValue}>
+        {ui}
+      </TransactionContext.Provider>
+    </MemoryRouter>
+  );
+};
+
 describe('Home Component', () => {
   it('renderiza el componente correctamente con datos', () => {
-    render(
-      <TransactionContext.Provider value={mockContextValue}>
-        <Home />
-      </TransactionContext.Provider>
-    );
+    renderWithProviders(<Home />);
 
     // Verificar elementos principales
     expect(screen.getByText('Tus cobros')).toBeInTheDocument();
@@ -65,9 +73,11 @@ describe('Home Component', () => {
     };
 
     render(
-      <TransactionContext.Provider value={loadingContext}>
-        <Home />
-      </TransactionContext.Provider>
+      <MemoryRouter>
+        <TransactionContext.Provider value={loadingContext}>
+          <Home />
+        </TransactionContext.Provider>
+      </MemoryRouter>
     );
 
     // Verificar que se muestran los skeletons
@@ -82,9 +92,11 @@ describe('Home Component', () => {
     };
 
     render(
-      <TransactionContext.Provider value={errorContext}>
-        <Home />
-      </TransactionContext.Provider>
+      <MemoryRouter>
+        <TransactionContext.Provider value={errorContext}>
+          <Home />
+        </TransactionContext.Provider>
+      </MemoryRouter>
     );
 
     expect(screen.getByText(/Error al cargar las transacciones/)).toBeInTheDocument();
@@ -97,20 +109,18 @@ describe('Home Component', () => {
     };
 
     render(
-      <TransactionContext.Provider value={emptyContext}>
-        <Home />
-      </TransactionContext.Provider>
+      <MemoryRouter>
+        <TransactionContext.Provider value={emptyContext}>
+          <Home />
+        </TransactionContext.Provider>
+      </MemoryRouter>
     );
 
     expect(screen.getByText(/No hay resultados que mostrar/)).toBeInTheDocument();
   });
 
   it('muestra los botones de período y el total', () => {
-    render(
-      <TransactionContext.Provider value={mockContextValue}>
-        <Home />
-      </TransactionContext.Provider>
-    );
+    renderWithProviders(<Home />);
 
     // Verificar que existen los botones de período
     const periodButtons = screen.getAllByRole('button', { name: /semanal|mensual|diario/i });

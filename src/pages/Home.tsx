@@ -5,14 +5,21 @@ import Transaction from "@/components/transaction";
 import { Filters } from "@/components/filters";
 import { useTransactionContext } from "@/hooks/useTransactionContext";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { DownloadDialog } from "@/components/DownloadDialog";
+import { Link } from "react-router-dom";
 
 function Home() {
   const { filteredTransactions, isLoading, error } = useTransactionContext();
   const [selectedPeriod, setSelectedPeriod] = useState<
     "daily" | "weekly" | "monthly"
   >("weekly");
+
+  const sortedTransactions = useMemo(() => {
+    return [...filteredTransactions].sort((a, b) => 
+      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
+  }, [filteredTransactions]);
 
   if (error) {
     return (
@@ -42,9 +49,9 @@ function Home() {
           )}
         </div>
 
-        <a className="text-md text-primary font-light mt-8 flex items-center justify-center gap-2">
+        <Link to="/metrics" className="text-md text-primary font-light mt-8 flex items-center justify-center gap-2 hover:text-gray-500">
           <ChartPie className="w-6 h-6" /> Ver métricas
-        </a>
+        </Link>
       </section>
 
       <section className="mt-20">
@@ -66,7 +73,7 @@ function Home() {
               </div>
             ))}
           </div>
-        ) : filteredTransactions.length === 0 ? (
+        ) : sortedTransactions.length === 0 ? (
           <div className="flex items-center justify-center mt-10 flex-col gap-4">
             <img src={notResults} alt="No hay resultados" />
             <p className="text-center text-neutral max-w-96">
@@ -76,7 +83,7 @@ function Home() {
           </div>
         ) : (
           <div className="max-w-96 md:max-w-xl mx-auto mt-6">
-            {filteredTransactions.map((transaction) => (
+            {sortedTransactions.map((transaction) => (
               <Transaction key={transaction.id} transaction={transaction} />
             ))}
           </div>

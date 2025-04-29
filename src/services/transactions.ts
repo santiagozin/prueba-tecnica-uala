@@ -1,6 +1,6 @@
 
 import { useQuery } from '@tanstack/react-query';
-import { Transaction } from '@/types/transaction';
+import type { Transaction } from '@/types/transaction';
 
 const fetchTransactions = async (): Promise<Transaction[]> => {
   const apiUrl = import.meta.env.VITE_API_URL;
