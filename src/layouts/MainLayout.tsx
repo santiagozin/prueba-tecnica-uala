@@ -60,7 +60,7 @@ function MainLayout() {
           isSidebarOpen={isSidebarOpen}
           isMobile={isMobile}
         />
-        <main className="px-4 pt-10 md:pt-20 flex-1 overflow-auto">
+        <main className="px-4 pt-10 md:pt-20 flex-1 overflow-auto z-5">
           <Outlet />
         </main>
       </div>

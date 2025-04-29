@@ -59,7 +59,7 @@ export default function Sidebar({ onClose, isMobile = false }: SidebarProps) {
         </ul>
       </nav>
 
-      <div className="mt-auto pt-6 mx-auto">
+      <div className="mt-auto mx-auto">
         <h3 className="text-sm text-gray-700 mb-4 font-medium">Descargá la app desde</h3>
         <a href="/" target="_blank">
           <img src={appleImage} alt="Apple" className="w-36 h-auto mb-4 hover:scale-105 transition-all duration-300" />

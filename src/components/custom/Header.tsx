@@ -11,7 +11,7 @@ interface HeaderProps {
 const Header = ({ onMenuClick, isMobile }: HeaderProps) => {
   return (
     <header
-      className={`z-1 h-20 w-full fixed top-0 bg-white md:shadow-sm border-header ${
+      className={`z-6 h-20 w-full fixed top-0 bg-white md:shadow-sm border-header ${
         isMobile ? "rounded-bl-[32px]" : "rounded-bl-0"
       }`}
     >

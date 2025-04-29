@@ -99,11 +99,11 @@ const Metrics = () => {
   }, [filteredTransactions, selectedPeriod]);
 
   return (
-    <div className="p-6 space-y-8 px-20 mt-10">
+    <div className="p-2 space-y-8 md:px-20 mt-10">
       <h2 className="text-2xl font-medium text-gray-700 text-left">Dashboard de Métricas</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-white p-6 rounded-lg shadow h-full">
+        <div className="bg-white p-6 rounded-lg shadow h-full min-h-[300px]">
           <h2 className="text-lg font-normal mt-2 flex items-center gap-2">
             <CircleDollarSign className="w-6 h-6" />
             Total de transacciones
@@ -141,7 +141,7 @@ const Metrics = () => {
                 Mes
               </button>
             </div>
-            <div className="text-5xl font-bold text-primary">
+            <div className="text-5xl font-normal text-primary">
               ${totalByPeriod.toLocaleString()}
             </div>
             <div className="text-gray-500">
